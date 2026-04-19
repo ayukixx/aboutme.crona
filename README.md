@@ -1,3 +1,3 @@
-# changed to clips
-This is a website I made my self for fun and for clips showcase
-i hope yall like it 
+# The about me page
+I made an about me page for fun and to expand my programming experience.
+i'll make more projects in the future when i find the free time because i also i got school
