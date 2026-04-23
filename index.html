@@ -287,6 +287,93 @@
       padding: 4px 0 2px;
       transition: color 0.35s ease;
     }
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      body {
+        align-items: flex-start;
+        padding: 16px;
+        padding-bottom: 32px;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 16px;
+      }
+
+      .card-sm {
+        padding: 16px 18px;
+        border-radius: 16px;
+      }
+
+      .topbar {
+        margin-bottom: 20px;
+      }
+
+      .profile-row {
+        gap: 14px;
+      }
+
+      .avatar-wrap img {
+        width: 68px;
+        height: 68px;
+      }
+
+      .profile-text h1 {
+        font-size: 1.25rem;
+      }
+
+      .handle {
+        font-size: 12px;
+      }
+
+      .tag {
+        font-size: 10px;
+        padding: 2px 8px;
+      }
+
+      .bio {
+        font-size: 13.5px;
+      }
+
+      .links-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+
+      .link-item {
+        padding: 13px 12px;
+        font-size: 12px;
+        gap: 8px;
+        min-height: 44px;
+        border-radius: 11px;
+      }
+
+      .link-item svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .link-item:hover {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .link-item[style*="span 2"] {
+        grid-column: span 1;
+      }
+
+      .profile-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -366,7 +453,7 @@
     </div>
   </div>
 
-  <p class="footer">made by crona &nbsp;·&nbsp; twitch.tv/fpscrona</p>
+  <p class="footer">made by crona &nbsp;·&nbsp; cr0n4.dev</p>
 
 </div>
 
