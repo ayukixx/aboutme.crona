@@ -1,106 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cr0n4's card</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="index_title_icon.ico" type="image/x-icon">
-    <title>About Me</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
-            background: #121212;
-            color: #eaeaea;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            margin-bottom: 20px;
-            background: #1e1e1e;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        img.profile {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 2px solid #333;
-        }
-        h1 {
-            margin-top: 0;
-            margin-bottom: 1px;
-            font-weight: 600;
-        }
-        p {
-            line-height: 1.6;
-            color: #d2d2d2;
-        }
-        .social a {
-            margin: 0 10px;
-            color: #61dafb;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-        .social a:hover {
-            text-decoration: underline;
-        }
-        .contact-btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 10px 20px;
-            border-radius: 6px;
-            background: #61dafb;
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .contact-btn:hover {
-            background: #52c2e0;
-        }
-        .footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #777;
-        }
-        ul {
-    display: inline-block;
-    text-align: left;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cr0n4's card</title>
+  <link rel="icon" href="index_title_icon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root[data-theme="dark"] {
+      --bg: #0e0e0f;
+      --surface: #161617;
+      --surface-2: #1f1f21;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --text-primary: #f0f0f0;
+      --text-secondary: #888;
+      --text-tertiary: #555;
+      --accent: #d4d4d4;
+      --accent-glow: rgba(212,212,212,0.08);
+      --tag-bg: rgba(255,255,255,0.05);
+      --toggle-bg: #2a2a2b;
+      --toggle-thumb: #f0f0f0;
+      --avatar-ring: rgba(255,255,255,0.1);
+      --link-color: #b0b0b0;
+      --link-hover: #f0f0f0;
+    }
+    :root[data-theme="light"] {
+      --bg: #f7f7f6;
+      --surface: #ffffff;
+      --surface-2: #f3f3f2;
+      --border: rgba(0,0,0,0.07);
+      --border-hover: rgba(0,0,0,0.14);
+      --text-primary: #111;
+      --text-secondary: #666;
+      --text-tertiary: #aaa;
+      --accent: #333;
+      --accent-glow: rgba(0,0,0,0.04);
+      --tag-bg: rgba(0,0,0,0.04);
+      --toggle-bg: #e0e0df;
+      --toggle-thumb: #111;
+      --avatar-ring: rgba(0,0,0,0.08);
+      --link-color: #555;
+      --link-hover: #111;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: rise 0.55s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 5px 11px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px #4ade8099;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── THEME TOGGLE ── */
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle-label {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+    .toggle-track {
+      width: 38px; height: 22px;
+      background: var(--toggle-bg);
+      border-radius: 99px;
+      position: relative;
+      transition: background 0.3s ease;
+      border: 1px solid var(--border);
+    }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--toggle-thumb);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease;
+    }
+    [data-theme="light"] .toggle-thumb { transform: translateX(16px); }
+
+    /* ── PROFILE ── */
+    .profile-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .avatar-wrap img {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--avatar-ring);
+      display: block;
+      transition: border-color 0.35s ease;
+    }
+
+    .profile-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.15;
+    }
+
+    .handle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .tag {
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── DIVIDER ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 22px 0;
+    }
+
+    /* ── BIO ── */
+    .bio {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .bio strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ── LINKS ── */
+    .card-sm {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+    .links-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--link-color);
+      font-size: 13px;
+      font-weight: 400;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
+    }
+    .link-item:hover {
+      background: var(--accent-glow);
+      border-color: var(--border-hover);
+      color: var(--link-hover);
+      transform: translateY(-1px);
+    }
+    .link-item svg {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      opacity: 0.65;
+      transition: opacity 0.2s;
+    }
+    .link-item:hover svg { opacity: 1; }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      padding: 4px 0 2px;
+      transition: color 0.35s ease;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
 
-        
-        <img class="profile" src="pfp_site.jpg" alt="Profile Photo">
+<div class="page">
 
-        <h1>Hello, I'm Cr0n4</h1>
-        <p>
-            Welcome to my about me page 
-        </p>
+  <!-- MAIN CARD -->
+  <div class="card">
 
-       
-        <div class="social">
-            <a href="https://github.com/ayukixx" target="_blank">GitHub</a>
-            <a href="https://steamcommunity.com/id/cronakvk/" target="_blank">Steam</a>
-            <a href="https://www.youtube.com/@fpscrona" target="_blank">Youtube</a>
-            <a href="https://www.twitch.tv/fpscrona" target="_blank">Twitch</a>
-            <a href="https://twitter.com/rrayukii" target="_blank">Twitter</a>
+    <div class="topbar">
+      <div class="status-pill">
+        <span class="dot"></span>
+        online
+      </div>
+      <div class="toggle" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
+        <span class="toggle-label" id="theme-label">Dark</span>
+        <div class="toggle-track">
+          <div class="toggle-thumb"></div>
         </div>
+      </div>
+    </div>
 
-        <div class="footer">
-            made/designed/created by Crona
+    <div class="profile-row">
+      <div class="avatar-wrap">
+        <img src="pfp_site.jpg" alt="Cr0n4's profile photo">
+      </div>
+      <div class="profile-text">
+        <h1>Cr0n4</h1>
+        <p class="handle">@fpscrona · 17 y/o</p>
+        <div class="tags">
+          <span class="tag">streamer</span>
+          <span class="tag">fps gamer</span>
+          <span class="tag">pc builder</span>
+          <span class="tag">furry</span>
         </div>
-<div class="container">
-<h3>17 (ill become 18 in november)</h3>
-<p>I stream FPS games and make content on YouTube. I love building PCs and learning about new hardware. I also enjoy playing games like Valorant, CS2, and Overwatch. I'm always looking to connect with other gamers and tech enthusiasts, so feel free to reach out!</p>
-<h4>also so many people ask me if i am a furry, and yeah i am</h4>
+      </div>
+    </div>
+
+    <hr>
+
+    <p class="bio">
+      I stream <strong>FPS games</strong> and make content on YouTube. Into building PCs and keeping up with hardware. You'll catch me on <strong>Valorant</strong>, <strong>CS2</strong>, and <strong>Overwatch</strong>. Always down to connect with other gamers and tech people.
+    </p>
+
+  </div>
+
+  <!-- LINKS CARD -->
+  <div class="card-sm">
+    <div class="links-label">find me on</div>
+    <div class="links-grid">
+
+      <a class="link-item" href="https://github.com/ayukixx" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23A11.52 11.52 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+
+      <a class="link-item" href="https://steamcommunity.com/id/cronakvk/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.007l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.029 4.524 4.524s-2.03 4.524-4.524 4.524h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.497 1.009 2.453-.4.957-1.497 1.41-2.454 1.01l.001.004zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273.015c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg>
+        Steam
+      </a>
+
+      <a class="link-item" href="https://www.youtube.com/@fpscrona" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        YouTube
+      </a>
+
+      <a class="link-item" href="https://www.twitch.tv/fpscrona" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        Twitch
+      </a>
+
+      <a class="link-item" href="https://twitter.com/rrayukii" target="_blank" style="grid-column: span 2;">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Twitter / X
+      </a>
+
+    </div>
+  </div>
+
+  <p class="footer">made by crona &nbsp;·&nbsp; twitch.tv/fpscrona</p>
+
 </div>
+
+<script>
+  function toggleTheme() {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-label').textContent = isDark ? 'Light' : 'Dark';
+  }
+</script>
 </body>
 </html>
